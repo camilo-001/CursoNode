@@ -1,4 +1,4 @@
-const empleados = [
+ const empleados = [
     {
         id: 1,
         nombre: 'pepito'
