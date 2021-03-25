@@ -1,12 +1,18 @@
-const {crearArchivo} = require('./helpers/multiplicar');
+const fs = require('fs'); // requieriendo el fileSystem que se encuentra dentro de los paquetes de node
 
-console.clear(); // limpia consola antes de ejecutar codigo
+console.clear();
+console.log('===================');
+console.log('Tabla del 5');
+console.log('===================');
 
+let salida = '';
 
-const[,,arg3 = 'base=4'] = process.argv;
-const[, base = 5 ] = arg3.split('=');
-console.log(base);
+for (let i = 1; i <= 10; i++) {
+    salida += `5 x ${i} = ${5 * i}\n`;
+}
+console.log(salida);
 
-crearArchivo(base)
-    .then(nombreArchivo => console.log(nombreArchivo,'fue creado'))
-console.log(1 + "1");
+fs.writeFile('tabla-5.txt', salida, (err) => { // el fs.writeFile, nos permite crear archivos, recibe la data y un callback
+    if (err) throw err;
+    console.log('Tabla-5.txt creado')
+})
