@@ -3,7 +3,10 @@ const { crearArchivoMultiplicar } = require('./helpers/multiplicar') // importam
 
 console.clear();
 
-const base = 3;
+const [, , arg3 = 'base=5'] = process.argv;
+const [, base = 1] = arg3.split('=')
+
+// const base = 3;
 
 crearArchivoMultiplicar(base)// llamamos a la función enviandole el parametro
 .then(nombreArchivo  => console.log(nombreArchivo,'creado')) 

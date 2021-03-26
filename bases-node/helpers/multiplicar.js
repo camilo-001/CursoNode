@@ -20,7 +20,7 @@ const crearArchivoMultiplicar = async (base = 5) => { // agregando el async para
         }
         console.log(salida);
 
-        fs.writeFileSync(`tabla-${base}.txt`, salida);
+        fs.writeFileSync(`tabla-${base}.txt`, salida); // el fs.writeFileSync nos permite realizar la misma tarea que el writeFile, solo que esta trabaja con promesas
 
         return ` tabla-${base}.txt`;
     }
