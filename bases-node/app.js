@@ -9,6 +9,6 @@ console.clear();
 
 // const base = 3;
 
-crearArchivoMultiplicar(argv.b, argv.l)// llamamos a la función enviandole los parametros
+crearArchivoMultiplicar(argv.b, argv.l,argv.h)// llamamos a la función enviandole los parametros
     .then(nombreArchivo => console.log(nombreArchivo, 'creado'))  // como llamamos a la función la cual es ahora una asyncFunction está retorna una promesa
     .catch(err => console.log(err));

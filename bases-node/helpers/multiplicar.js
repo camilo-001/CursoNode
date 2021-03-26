@@ -6,13 +6,13 @@
 const fs = require('fs');
 
 // cramos una función para crear el archivo que contenta las operaciones
-const crearArchivoMultiplicar = async (base = 5, l = false) => { // agregando el async para retornar una promesa
+const crearArchivoMultiplicar = async (base = 5, l = false, h = 10) => { // agregando el async para retornar una promesa
 
     try {
 
         let salida = '';
 
-        for (let i = 1; i <= 10; i++) {
+        for (let i = 1; i <= h; i++) {
             salida += `${base} x ${i} = ${base * i}\n`;
         }
         if (l) {
