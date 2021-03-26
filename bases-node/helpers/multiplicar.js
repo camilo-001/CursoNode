@@ -6,19 +6,21 @@
 const fs = require('fs');
 
 // cramos una función para crear el archivo que contenta las operaciones
-const crearArchivoMultiplicar = async (base = 5) => { // agregando el async para retornar una promesa
+const crearArchivoMultiplicar = async (base = 5, l = false) => { // agregando el async para retornar una promesa
 
     try {
-        console.log('===================');
-        console.log(`Tabla del ${base}`);
-        console.log('===================');
 
         let salida = '';
 
         for (let i = 1; i <= 10; i++) {
             salida += `${base} x ${i} = ${base * i}\n`;
         }
-        console.log(salida);
+        if (l) {
+            console.log('===================');
+            console.log(`Tabla del ${base}`);
+            console.log('===================');
+            console.log(salida);
+        }
 
         fs.writeFileSync(`tabla-${base}.txt`, salida); // el fs.writeFileSync nos permite realizar la misma tarea que el writeFile, solo que esta trabaja con promesas
 
