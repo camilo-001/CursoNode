@@ -12,7 +12,7 @@ const tareas = new Tareas(); // inicializando las tareas
 const main = async () => { // utilizamos el async ya que al implementar varias funciónes estas deberán de ejecutarse en secuencia
 
     do {
-        opt = await inquirerMenu(); // utilizando la función de inquirer 
+        opt = await inquirerMenu(); // utilizando la función de inquirer para imprimir el menu
         
         switch(opt){
             case'1':
@@ -21,7 +21,7 @@ const main = async () => { // utilizamos el async ya que al implementar varias f
 
             break;
             case'2':
-            console.log(tareas._listado); // mostramos el listado de tareas creadas
+            console.log(tareas.listadoArr); // mostramos el listado de tareas creadas
             break;
         }
     
