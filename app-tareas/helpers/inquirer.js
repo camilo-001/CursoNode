@@ -63,7 +63,26 @@ const pausa = async () => {
     const opt = await inquirer.prompt(continuar);
     return opt
 }
+
+const leerInput = async (message) => { // creamos la función para que el usuario ingrese la nueva tarea
+    const question = [
+        {
+            type: 'input',
+            name: 'desc',
+            message,
+            validate(value){ // validate nos permite validar el input del usuario
+                if(value.length === 0){ // comprobamos que el usuario haya ingresado la descripción
+                    return 'por favor ingrese un valor';
+                }
+                return true;
+            }
+        }
+    ];
+    const {desc} = await inquirer.prompt(question); // mostramos la pregunta al usuario y esta la desestructuramos para almacenarla en desc
+    return desc; // retornamos el desc
+}
 module.exports = {
     inquirerMenu,
-    pausa
+    pausa,
+    leerInput
 }
