@@ -4,7 +4,7 @@ const Tarea = require("./tarea");
 
 class Tareas {
 
-    get listadoArr(){
+    get listadoArr(){ // get para convertir nuestro objeto de listado de tareas en un arreglo
         const listado = [];
 
         Object.keys(this._listado).forEach(key =>{
@@ -13,6 +13,7 @@ class Tareas {
         })
         return listado;
     }
+
     constructor() {
         this._listado = {}; // en listado se almacenarán todas las tareas en forma de objetos
     }

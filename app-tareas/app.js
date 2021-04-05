@@ -1,4 +1,5 @@
 require('colors');
+const { guardarDb } = require('./helpers/guardarArchivo');
 const { inquirerMenu, pausa , leerInput} = require('./helpers/inquirer'); // importando la función de inquireMenu 
 const Tarea = require('./models/tarea');
 const Tareas = require('./models/tareas');
@@ -24,6 +25,8 @@ const main = async () => { // utilizamos el async ya que al implementar varias f
             console.log(tareas.listadoArr); // mostramos el listado de tareas creadas
             break;
         }
+
+        guardarDb(tareas.listadoArr); // llamamos al metodo de guardar el archivo
     
         await pausa();
     } while (opt !== '0') {
