@@ -1,5 +1,5 @@
 // creamos Tareas para manejar varias tareas, esta clase es para manipular el listado de tareas
-
+require('colors');
 const Tarea = require("./tarea");
 
 class Tareas {
@@ -22,7 +22,19 @@ class Tareas {
         tareas.forEach(tarea => {
             this._listado[tarea.id] = tarea;
         })
+    }
 
+    listadoCompleto() {
+        // console.log(this.listadoArr)
+
+        this.listadoArr.forEach((dato, i) => {
+            const idx = `${i + 1}`.green
+            const { desc, completadoEn } = dato;
+            const estado = (completadoEn)
+                ? 'Completada'.green
+                : 'Pendiente'.red;
+            console.log(`${idx} ${desc} :: ${estado}`);
+        })
     }
 
     crearTarea(desc = '') {// creamos el metodo para la creación de la tarea el cual recibe la descripción de la tarea

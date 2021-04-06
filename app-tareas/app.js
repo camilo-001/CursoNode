@@ -16,10 +16,9 @@ const main = async () => { // utilizamos el async ya que al implementar varias f
     if (tareasDb) { // verficamos si existe el listado
         tareas.cargarTareasFromArray(tareasDb) // si existe llamamos al metodo para cargar las tareas al listado del programa enviando el array del documento
     }
-
     do {
         opt = await inquirerMenu(); // utilizando la función de inquirer para imprimir el menu
-
+        
         switch (opt) {
             case '1':
                 const desc = await leerInput('Descripcion de la tarea:'); // utilizamos la función de leer inputt 
@@ -27,7 +26,9 @@ const main = async () => { // utilizamos el async ya que al implementar varias f
 
                 break;
             case '2':
-                console.log(tareas.listadoArr); // mostramos el listado de tareas creadas
+                tareas.listadoCompleto();
+                //console.log (tareas.listadoArr); // mostramos el listado de tareas creadas
+                
                 break;
         }
 

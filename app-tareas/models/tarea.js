@@ -6,7 +6,7 @@ class Tarea { // creación de la clase tarea
 
         this.id = uuidv4(); // uuidv4 proporciona un id aleatorio
         this.desc = desc;
-        this.compleradoEn = null;
+        this.completadoEn = null;
     }
 }
 
