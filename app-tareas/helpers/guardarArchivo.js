@@ -9,7 +9,7 @@ const guardarDb = (data) => {
 
 const leerDb = () => { // metodo para leer el archivo json
     if (!fs.existsSync(archivo)) { // confirmando si el archivo existe
-        return null;
+        return null; // si no existe retornamos null
     }
     
     // usando el readFile para la lectura

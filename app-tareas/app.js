@@ -9,14 +9,14 @@ const Tareas = require('./models/tareas');
 // creando la clase main 
 let opt = '';
 
-const tareas = new Tareas(); // inicializando las tareas
+const tareas = new Tareas(); // inicializando la clase tareas
 const main = async () => { // utilizamos el async ya que al implementar varias funciónes estas deberán de ejecutarse en secuencia
 
     const tareasDb = leerDb(); // leyendo toda la data que se encuentra en nuestro bd (archivo json)
-    if (tareasDb) {
-
+    if (tareasDb) { // verficamos si existe el listado
+        tareas.cargarTareasFromArray(tareasDb) // si existe llamamos al metodo para cargar las tareas al listado del programa enviando el array del documento
     }
-    await pausa();
+
     do {
         opt = await inquirerMenu(); // utilizando la función de inquirer para imprimir el menu
 

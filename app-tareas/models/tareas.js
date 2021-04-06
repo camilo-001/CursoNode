@@ -1,13 +1,13 @@
-// creamos Tareas para manejar varias tareas 
+// creamos Tareas para manejar varias tareas, esta clase es para manipular el listado de tareas
 
 const Tarea = require("./tarea");
 
 class Tareas {
 
-    get listadoArr(){ // get para convertir nuestro objeto de listado de tareas en un arreglo
+    get listadoArr() { // get para convertir nuestro objeto de listado de tareas en un arreglo
         const listado = [];
 
-        Object.keys(this._listado).forEach(key =>{
+        Object.keys(this._listado).forEach(key => {
             const tarea = this._listado[key]
             listado.push(tarea)
         })
@@ -16,6 +16,13 @@ class Tareas {
 
     constructor() {
         this._listado = {}; // en listado se almacenarán todas las tareas en forma de objetos
+    }
+
+    cargarTareasFromArray(tareas = []) { // función para enviar el listado de tareas del array de bd al listado del programa
+        tareas.forEach(tarea => {
+            this._listado[tarea.id] = tarea;
+        })
+
     }
 
     crearTarea(desc = '') {// creamos el metodo para la creación de la tarea el cual recibe la descripción de la tarea
