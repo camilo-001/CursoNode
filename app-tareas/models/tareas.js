@@ -42,6 +42,36 @@ class Tareas {
         const tarea = new Tarea(desc); // instanciamos la clase de tarea
         this._listado[tarea.id] = tarea; // ye enviamos la tarea al listado proporcionando un id
     }
+
+    listarPendientesCompletadas(completadas = true) {
+
+        let idx = 0;
+        this.listadoArr.forEach((dato, i) => {
+
+            const { desc, completadoEn } = dato;
+            const estado = (completadoEn)
+                ? 'Completada'.green
+                : 'Pendiente'.red;
+
+            if (completadas) {
+                // mostrar las completadas
+                if (completadoEn) {
+                    idx += 1;
+                    console.log(`${(idx + '.'.green)} ${desc} :: Completada el ${(':' + completadoEn).green}`);
+
+                }
+            } else {
+                // mostrar las pendientes
+                if (!completadoEn) {
+                    idx += 1;
+                    console.log(`${(idx + '.'.green)} ${desc} :: ${estado}`);
+                }
+            }
+
+        });
+    }
+
 }
+
 
 module.exports = Tareas;

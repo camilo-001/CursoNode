@@ -18,7 +18,7 @@ const main = async () => { // utilizamos el async ya que al implementar varias f
     }
     do {
         opt = await inquirerMenu(); // utilizando la función de inquirer para imprimir el menu
-        
+
         switch (opt) {
             case '1':
                 const desc = await leerInput('Descripcion de la tarea:'); // utilizamos la función de leer inputt 
@@ -28,7 +28,15 @@ const main = async () => { // utilizamos el async ya que al implementar varias f
             case '2':
                 tareas.listadoCompleto();
                 //console.log (tareas.listadoArr); // mostramos el listado de tareas creadas
-                
+
+                break;
+
+            case '3':
+                tareas.listarPendientesCompletadas(true)
+                break;
+
+            case '4':
+                tareas.listarPendientesCompletadas(false)
                 break;
         }
 
