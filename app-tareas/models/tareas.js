@@ -18,6 +18,12 @@ class Tareas {
         this._listado = {}; // en listado se almacenarán todas las tareas en forma de objetos
     }
 
+    borrarTarea(id = '') {
+        if (this._listado[id]) { 
+            delete this._listado[id];
+        }
+    }
+
     cargarTareasFromArray(tareas = []) { // función para enviar el listado de tareas del array de bd al listado del programa
         tareas.forEach(tarea => {
             this._listado[tarea.id] = tarea;

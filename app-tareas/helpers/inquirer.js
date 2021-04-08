@@ -70,19 +70,63 @@ const leerInput = async (message) => { // creamos la función para que el usuari
             type: 'input',
             name: 'desc',
             message,
-            validate(value){ // validate nos permite validar el input del usuario
-                if(value.length === 0){ // comprobamos que el usuario haya ingresado la descripción
+            validate(value) { // validate nos permite validar el input del usuario
+                if (value.length === 0) { // comprobamos que el usuario haya ingresado la descripción
                     return 'por favor ingrese un valor';
                 }
                 return true;
             }
         }
     ];
-    const {desc} = await inquirer.prompt(question); // mostramos la pregunta al usuario y esta la desestructuramos para almacenarla en desc
+    const { desc } = await inquirer.prompt(question); // mostramos la pregunta al usuario y esta la desestructuramos para almacenarla en desc
     return desc; // retornamos el desc
 }
+// creamos el metodo para el listado de las tareas para borrar el cual recibe un arreglo
+const listadoTareasBorrar = async (tareas = []) => {
+
+    const choices = tareas.map((tarea, i) => { // usamos map para retornar un arreglo nuevo con las modificaciónes para las opciones
+        const idx = `${i + 1}`.green;
+        return { // retornamos las opciones
+            value: tarea.id,
+            name: `${idx} ${tarea.desc}`
+        }
+    });
+
+choices.unshift({
+    value: '0',
+    name: '0.'.green +'Cancelar'
+});
+    const preguntas = [ // creamos el listado
+        {
+            type: 'list',
+            name: 'id',
+            message: 'Borrar',
+            choices // establecemos las opciones
+        }
+    ]
+    const { id } = await inquirer.prompt(preguntas);
+    return id;
+}
+
+// ahora creamos un metodo para confirmar si desea borrar la tarea
+const confirmar = async (message) => {
+    const question = [
+        {
+            type: 'confirm', // de tipo confirm 
+            name: 'ok',
+            message
+        }
+    ];
+    const { ok } = await inquirer.prompt(question); // mostramos el prompt
+    return ok;
+}
+
+
+
 module.exports = {
     inquirerMenu,
     pausa,
-    leerInput
+    leerInput,
+    listadoTareasBorrar, 
+    confirmar
 }
