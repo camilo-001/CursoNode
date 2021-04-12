@@ -2,7 +2,7 @@ const { inquirerMenu, leerInput, pausa } = require('./helpers/inquirer');
 const Busquedas = require('./models/busquedas');
 
 const main = async () => {
-
+const busquedas = new Busquedas();
     let opt = '';
 
     do {
@@ -11,8 +11,8 @@ const main = async () => {
             case 1:
                 // mostrar mensaje
                 const lugar = await leerInput('Ciudad; ')
-                console.log(lugar);
-                // mostrar los resultados
+                await busquedas.ciudad(lugar); // enviando el lugar que el usuario puso 
+             // mostrar los resultados
                 console.log('\nInformación de la ciudad\n'.green);
                 console.log('Ciudad: ',);
                 console.log('lat:',);
