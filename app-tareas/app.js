@@ -1,6 +1,6 @@
 require('colors');
 const { guardarDb, leerDb } = require('./helpers/guardarArchivo');
-const { inquirerMenu, pausa, leerInput, listadoTareasBorrar, confirmar } = require('./helpers/inquirer'); // importando la función de inquireMenu 
+const { inquirerMenu, pausa, leerInput, listadoTareasBorrar, confirmar, mostrarListadoChecklist } = require('./helpers/inquirer'); // importando la función de inquireMenu 
 const Tarea = require('./models/tarea');
 const Tareas = require('./models/tareas');
 
@@ -38,7 +38,10 @@ const main = async () => { // utilizamos el async ya que al implementar varias f
             case '4':
                 tareas.listarPendientesCompletadas(false)
                 break;
-
+            case '5':
+                const ids = await mostrarListadoChecklist(tareas.listadoArr); // Mostrar el listado con checklist
+                tareas.toogleCompletadas(ids)
+                break;
             case '6':
                 const id = await listadoTareasBorrar(tareas.listadoArr); // traemos el metodo para listar las tareas para borrar una 
                 if (id !== '0') {

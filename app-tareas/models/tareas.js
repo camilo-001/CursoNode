@@ -19,7 +19,7 @@ class Tareas {
     }
 
     borrarTarea(id = '') {
-        if (this._listado[id]) { 
+        if (this._listado[id]) {
             delete this._listado[id];
         }
     }
@@ -75,6 +75,21 @@ class Tareas {
             }
 
         });
+    }
+
+    toogleCompletadas(ids = []) { // función para completar las tareas
+        ids.forEach(id => {
+            const tarea = this._listado[id]; // almacenamos el listado de ids que se encuentren
+            if (!tarea.completadoEn) { // verificamos si estas tareas fueron completadas o no
+                tarea.completadoEn = new Date().toISOString() // si no han sido completadas el date se lo da el toISOString
+            }
+        });
+        this.listadoArr.forEach(tarea => { // para desmarcar las tareas completadas
+            if (!ids.includes(tarea.id)) { // verificamos si las que no estan marcadas
+                this._listado[tarea.id];
+                tarea.completadoEn = null; // las no marcadas les asiganmos el null
+            }
+        })
     }
 
 }
