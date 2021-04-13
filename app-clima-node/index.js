@@ -2,7 +2,7 @@
 require('dotenv').config({ path: './token.env' })// usando el paquete de dotenv para la configuración de variables de entorno
 
 
-const { inquirerMenu, leerInput, pausa } = require('./helpers/inquirer');
+const { inquirerMenu, leerInput, pausa, listadoLugares } = require('./helpers/inquirer');
 const Busquedas = require('./models/busquedas');
 
 const main = async () => {
@@ -15,13 +15,18 @@ const busquedas = new Busquedas();
         switch (opt) {
             case 1:
                 // mostrar mensaje
-                const lugar = await leerInput('Ciudad; ')
-                await busquedas.ciudad(lugar); // enviando el lugar que el usuario puso 
+                const termino = await leerInput('Ciudad; ') // almacenamos la respuesta del usuario
+                //buscar los lugares
+                const lugares = await busquedas.ciudad(termino); // buscamos la ciudad 
+                //seleccionar el lugar
+                const idSeleccionado = await listadoLugares (lugares) // creamos la lista con el arrelo de los lugare
+                const lugarSeleccionado = lugares.find(l => l.id === idSeleccionado) // extraemos la información del lugar que coincida con el id
+
              // mostrar los resultados
                 console.log('\nInformación de la ciudad\n'.green);
-                console.log('Ciudad: ',);
-                console.log('lat:',);
-                console.log('lang:',);
+                console.log('Ciudad: ', lugarSeleccionado.nombre); // mostramos la información con cada dato que necesitamos (nombre de ciudad)
+                console.log('lat:', lugarSeleccionado.lat);
+                console.log('lang:', lugarSeleccionado.lng);
                 console.log('\Temperatura:',);
                 console.log('Mínima');
                 console.log('Maxima',);

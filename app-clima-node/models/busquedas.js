@@ -24,12 +24,15 @@ class Busquedas { // modelo de busqueda de la indormación de la ciudad
                 baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${lugar}.json`, // la base de la url la cual como vimos en postman recesita el lugar o la ciudad
                 params: this.paramsMapBox
             });
-
             const resp = await instance.get(); // Realizando la petición get a la istancia de axios
+            // retornamos la información que recibimos del metodo get
+            return resp.data.features.map(lugar =>({ // definimos que datos vamos a devolver que es la data y los features
+                id: lugar.id, // asiganmos los datos
+                nombre : lugar.place_name, // nombre de la ciudad
+                lng : lugar.center[0], // longitud
+                lat: lugar.center[1], // latitud
 
-            console.log(resp.data);
-
-            return []; // retornar lugares que coincidan 
+            }));
 
         } catch (error) {
             return [];
