@@ -6,14 +6,35 @@ class Busquedas { // modelo de busqueda de la indormación de la ciudad
     constructor() {
 
     }
+    // creamos el get por si otro endpoint necesita los mismos parametros
+    get paramsMapBox() { // los  parametros de la ruta 
+        return {
+            'access_token': process.env.MAPBOX_KEY, // pasamos el token,el cual está configurado en nuestras variables de entorno
+            'limit': 5,
+            'language': 'es'
+        }
+    }
+
     async ciudad(lugar = '') {
-        // peticion http
-        // console.log('ciudad',lugar);
-        const resp = await axios.get('https://reqres.in/api/users?page=2')  // realizando una poetición get a un endpoint de prueba
-        console.log(resp.data);
 
+        // las peticiones http deben realizarse en un trycatch
+        try {
+            const instance = axios.create({ // creamos las instancias de axios las cuales están en un objeto
+    
+                baseURL: `https://api.mapbox.com/geocoding/v5/mapbox.places/${lugar}.json`, // la base de la url la cual como vimos en postman recesita el lugar o la ciudad
+                params: this.paramsMapBox
+            });
 
-        return []; // retornar lugares que coincidan 
+            const resp = await instance.get(); // Realizando la petición get a la istancia de axios
+
+            console.log(resp.data);
+
+            return []; // retornar lugares que coincidan 
+
+        } catch (error) {
+            return [];
+        }
+
     }
 }
 

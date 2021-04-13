@@ -1,7 +1,12 @@
+// require('dotenv').config() 
+require('dotenv').config({ path: './token.env' })// usando el paquete de dotenv para la configuración de variables de entorno
+
+
 const { inquirerMenu, leerInput, pausa } = require('./helpers/inquirer');
 const Busquedas = require('./models/busquedas');
 
 const main = async () => {
+
 const busquedas = new Busquedas();
     let opt = '';
 
