@@ -22,14 +22,19 @@ const busquedas = new Busquedas();
                 const idSeleccionado = await listadoLugares (lugares) // creamos la lista con el arrelo de los lugare
                 const lugarSeleccionado = lugares.find(l => l.id === idSeleccionado) // extraemos la información del lugar que coincida con el id
 
+                // clima
+                const clima = await busquedas.climaLugar(lugarSeleccionado.lat, lugarSeleccionado.lng);
+
              // mostrar los resultados
+             console.clear();
                 console.log('\nInformación de la ciudad\n'.green);
                 console.log('Ciudad: ', lugarSeleccionado.nombre); // mostramos la información con cada dato que necesitamos (nombre de ciudad)
                 console.log('lat:', lugarSeleccionado.lat);
                 console.log('lang:', lugarSeleccionado.lng);
-                console.log('\Temperatura:',);
-                console.log('Mínima');
-                console.log('Maxima',);
+                console.log('Temperatura:', clima.temp);
+                console.log('Mínima',clima.min);
+                console.log('Maxima',clima.max);
+                console.log('Como está el clima:', clima.desc);
 
                 break;
             case 2:
