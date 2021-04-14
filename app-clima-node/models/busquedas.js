@@ -1,11 +1,24 @@
+const fs = require('fs');
+
 const axios = require('axios');  // importando axios para poder hacer las peticiones http
+const { info } = require('console');
 
 class Busquedas { // modelo de busqueda de la indormación de la ciudad
 
-    // historial = ['Bogotá', 'Madrid', 'Lima'];
+    historial = [];
+    dbPath = 'db/database.json'; // path para crear el json
     constructor() {
-
+        this.leerBD();
     }
+    get historialCapitalizado() { // para capitalizar las letras de los nombres del registro al momento de leer la base de datos
+        return this.historial.map(lugar =>{
+            let palabras = lugar.split(' ');
+            palabras = palabras.map(p => p[0].toUpperCase() + p.substring(1))
+
+            return palabras.join('');
+        })
+    }
+
     // creamos el get por si otro endpoint necesita los mismos parametros
     get paramsMapBox() { // los  parametros de la ruta 
         return {
@@ -57,9 +70,9 @@ class Busquedas { // modelo de busqueda de la indormación de la ciudad
 
             const resp = await instance.get();
 
-            const{weather, main} = resp.data;
+            const { weather, main } = resp.data;
             return {
-                desc : weather[0].description,
+                desc: weather[0].description,
                 min: main.temp_min,
                 max: main.temp_max,
                 temp: main.temp,
@@ -68,7 +81,35 @@ class Busquedas { // modelo de busqueda de la indormación de la ciudad
         } catch (error) {
             console.log(error);
         }
+    };
+
+    agregarHistorial(lugar = '') {
+        if (this.historial.includes(lugar.toLocaleLowerCase())) {
+            return;
+        }
+
+        this.historial.unshift(lugar.toLocaleLowerCase());
+
+        // Grabar en bd
+        this.guardarDB();
     }
+
+    guardarDB() { // función apra gaurdar en el archivo json
+
+        const payload = { // objeto de payload por si en un futuro se requiere guardar más de una propiedad
+            historial: this.historial
+        };
+        fs.writeFileSync(this.dbPath, JSON.stringify(payload)) // para escribir en el archivo json 
+    }
+
+    leerBD() { // función para leer el archivo json
+        if (!fs.existsSync(this.dbPath)) return; // berificamos la exitencia del archivo
+        const info = fs.readFileSync(this.dbPath,{encoding: 'utf-8'});
+        const data = JSON.parse(info);
+        this.historial = data.historial;
+    }
+
+
 }
 
 module.exports = Busquedas;
